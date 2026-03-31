@@ -53,16 +53,7 @@ python -m venv venv
 2. Cài đặt thư viện
 PowerShell
 python -m pip install ultralytics streamlit opencv-python pillow
-3. Cấu trúc thư mục đồ án
-Plaintext
-Rice_Disease_Detection/
-├── dataset/             # Dữ liệu hình ảnh 10 loại bệnh
-├── weights/
-│   └── best_hybrid.pt   # File trọng số sau khi train
-├── modules/
-│   └── cbam.py          # Code định nghĩa lớp CBAM
-├── app.py               # Giao diện Web Streamlit
-└── train.py             # Script huấn luyện mô hình
+
 📊 Đánh giá kết quả
 Hệ thống được đánh giá qua các chỉ số:
 
