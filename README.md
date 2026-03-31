@@ -25,7 +25,7 @@ Leaf Smut (Than kháng)
 
 Tungro (Tungro)
 
-... (Cậu liệt kê nốt các bệnh còn lại trong bộ Data của mình nhé)
+...
 
 🏗 Kiến trúc mô hình Hybrid
 Dự án áp dụng cấu trúc đa tầng để tối ưu hóa độ chính xác mAP:
