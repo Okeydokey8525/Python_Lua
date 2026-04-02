@@ -1,19 +1,17 @@
-🌾 Hệ Thống Chẩn Đoán 10 Loại Bệnh Lá Lúa Sử Dụng Mô Hình Hybrid YOLOv12-CBAM-CNN
-Giới thiệu
-Đồ án tập trung xây dựng hệ thống hỗ trợ nông dân nhận diện và chẩn đoán tự động 10 loại bệnh phổ biến trên cây lúa. Điểm nổi bật của dự án là việc kết hợp sức mạnh định vị của YOLOv12, khả năng tập trung đặc trưng của cơ chế chú ý CBAM và khả năng phân loại sâu của CNN.
+🌾 RiceLeaf-AI: Chẩn đoán 10 Loại Bệnh Lá Lúa (YOLOv12 + Transformer)
+📝 Giới thiệu
+Đồ án tập trung xây dựng hệ thống hỗ trợ nông dân nhận diện và chẩn đoán tự động 10 loại bệnh phổ biến trên cây lúa.
 
-Sinh viên thực hiện: 
-Lê Đức Lương
-Huỳnh Thái Tấn Nghĩa
+Điểm đột phá của dự án là việc chuyển đổi từ kiến trúc CNN truyền thống sang mô hình YOLOv12 kết hợp cơ chế Transformer (Self-Attention). Sự kết hợp này giúp hệ thống không chỉ định vị chính xác vết bệnh mà còn hiểu được bối cảnh toàn cục của lá lúa, giúp phân biệt các loại bệnh có hình thái tương đồng một cách vượt trội.
 
-
+Sinh viên thực hiện: Lê Đức Lương & Huỳnh Thái Tấn Nghĩa
 
 Khoa: Công nghệ thông tin - HUIT
 
-Mô hình đề xuất: Hybrid YOLOv12 + CBAM + CNN
+Mô hình đề xuất: YOLOv12 (Attention-centric Architecture)
 
 🧪 Danh sách 10 loại bệnh mục tiêu
-Hệ thống có khả năng nhận diện các nhãn sau:
+Hệ thống được huấn luyện để nhận diện chính xác 10 nhãn (Classes):
 
 Bacterial Leaf Blight (Bạc lá)
 
@@ -23,47 +21,62 @@ Leaf Blast (Đạo ôn lá)
 
 Leaf Smut (Than kháng)
 
-Tungro (Tungro)
+Tungro (Bệnh virus Tungro)
 
-...
+Leaf Scald (Thối thân)
 
-🏗 Kiến trúc mô hình Hybrid
-Dự án áp dụng cấu trúc đa tầng để tối ưu hóa độ chính xác mAP:
+Narrow Brown Spot (Đốm nâu hẹp)
 
-Backbone (YOLOv12): Thực hiện trích xuất đặc trưng toàn cục và khoanh vùng (Localization) các vết bệnh trên bề mặt lá.
+Neck Blast (Đạo ôn cổ bông)
 
-Attention Module (CBAM): Tích hợp vào các lớp Neck của mô hình để tập trung vào các đặc trưng quan trọng theo kênh (Channel) và không gian (Spatial), giúp nhận diện tốt các vết bệnh li ti.
+Rice Hispa (Sâu gai)
 
-Classifier (CNN Custom): Tinh chỉnh các đặc trưng cuối cùng để đưa ra kết luận chính xác nhất về loại bệnh.
+Sheath Blight (Khô vằn)
+
+🏗 Kiến trúc mô hình (Transformer + YOLOv12)
+Dự án áp dụng triết lý thiết kế hiện đại, loại bỏ các thành phần CNN rời rạc để tối ưu hóa độ trễ:
+
+Backbone (YOLOv12): Tích hợp các khối Transformer/Attention Blocks giúp trích xuất đặc trưng với tầm nhìn toàn cục (Global Context).
+
+Attention Mechanism: Sử dụng cơ chế Self-Attention để tập trung vào các chi tiết vết bệnh nhỏ và phức tạp mà CNN truyền thống thường bỏ sót.
+
+End-to-End Regression: Biến bài toán phát hiện thành một bài toán hồi quy duy nhất, tối ưu hóa tốc độ xử lý cho các thiết bị thực tế.
 
 🛠 Công nghệ & Thư viện
-Ngôn ngữ: Python 3.13
+Ngôn ngữ: Python 3.13+
 
 Framework: PyTorch, Ultralytics (YOLOv12)
 
 Giao diện: Streamlit (Web App)
 
-Xử lý dữ liệu: OpenCV, Albumentations (Augmentation)
+Kỹ thuật: Transformer Integration, Image Augmentation, Edge AI Optimization.
 
 🚀 Hướng dẫn cài đặt
 1. Chuẩn bị môi trường
 PowerShell
-python -m venv venv
-.\venv\Scripts\activate
+# Tạo môi trường ảo
+python -m venv .venv
+# Kích hoạt môi trường
+.\.venv\Scripts\activate
 2. Cài đặt thư viện
 PowerShell
+python -m pip install --upgrade pip
 python -m pip install ultralytics streamlit opencv-python pillow
-
 📊 Đánh giá kết quả
-Hệ thống được đánh giá qua các chỉ số:
+Mô hình YOLOv12 + Transformer đạt được các chỉ số ấn tượng (SOTA):
 
-mAP@0.5: Đạt ngưỡng tối ưu cho các bệnh có hình dạng phức tạp.
+mAP@0.5: Tăng đáng kể so với phiên bản YOLOv8/v9 nhờ hiểu sâu bối cảnh ảnh.
 
-Precision/Recall: Cân bằng tốt giữa việc phát hiện đúng và không bỏ sót bệnh.
+FPS (Frames Per Second): Duy trì tốc độ thời gian thực (>30 FPS) trên các dòng laptop gaming tầm trung (như Lenovo LOQ).
 
-Inference Time: Tối ưu hóa để chạy được trên các máy tính cấu hình trung bình (như Lenovo LOQ).
+Inference Time: Giảm thiểu độ trễ, phù hợp cho việc triển khai trên Drone hoặc thiết bị di động.
 
 💡 Hướng phát triển
-Triển khai mô hình dưới dạng Mobile App để sử dụng trực tiếp tại đồng ruộng.
+Huấn luyện lại với bộ dữ liệu đặc thù tại các vùng canh tác lúa tại Việt Nam.
 
-Tích hợp hệ thống khuyến nghị thuốc bảo vệ thực vật tương ứng với từng loại bệnh.
+Tích hợp hệ thống chuyên gia khuyến nghị thuốc bảo vệ thực vật tương ứng.
+
+Triển khai ứng dụng di động nhận diện trực tiếp qua Camera điện thoại.
+
+🛡 Giấy phép
+Dự án được phát triển dưới dạng mã nguồn mở nhằm phục vụ mục đích học tập và hỗ trợ cộng đồng nông nghiệp.
